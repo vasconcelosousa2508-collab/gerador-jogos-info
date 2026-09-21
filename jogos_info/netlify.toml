@@ -1,0 +1,7 @@
+[build]
+base = "jogos_info"
+command = "git clone https://github.com/flutter/flutter.git -b stable --depth 1 && ./flutter/bin/flutter build web --release"
+publish = "jogos_info/build/web"
+
+[build.environment]
+FLUTTER_CHANNEL = "stable"
