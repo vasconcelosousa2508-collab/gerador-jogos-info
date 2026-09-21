@@ -130,7 +130,8 @@ class _TelaCardsState extends State<TelaCards> {
                                               const EdgeInsets.all(6.0),
                                               decoration: BoxDecoration(
                                                 color: estaSelecionado
-                                                    ? Colors.white.withOpacity(0.18)
+                                                    ? Colors.white
+                                                    .withOpacity(0.18)
                                                     : Colors.transparent,
                                                 borderRadius:
                                                 BorderRadius.circular(10),
@@ -167,9 +168,39 @@ class _TelaCardsState extends State<TelaCards> {
                             ),
                             const SizedBox(height: 20),
 
-                            // MODALIDADE E HORÁRIO
+                            // DIA DA SEMANA E MODALIDADE
                             Row(
                               children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      _buildLabel('Dia'),
+                                      const SizedBox(height: 8),
+                                      DropdownButtonFormField<DiaSemana>(
+                                        value: jogo.dia,
+                                        dropdownColor: const Color(0xFF222222),
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                        decoration: _inputDecoration(),
+                                        items: DiaSemana.values.map((dia) {
+                                          return DropdownMenuItem(
+                                            value: dia,
+                                            child: Text(dia.sigla),
+                                          );
+                                        }).toList(),
+                                        onChanged: (novoValor) {
+                                          if (novoValor != null) {
+                                            setState(
+                                                    () => jogo.dia = novoValor);
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
@@ -199,35 +230,33 @@ class _TelaCardsState extends State<TelaCards> {
                                     ],
                                   ),
                                 ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      _buildLabel('Horário'),
-                                      const SizedBox(height: 8),
-                                      DropdownButtonFormField<Horario>(
-                                        value: jogo.horario,
-                                        dropdownColor: const Color(0xFF222222),
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                        decoration: _inputDecoration(),
-                                        items: Horario.values.map((horario) {
-                                          return DropdownMenuItem(
-                                            value: horario,
-                                            child: Text(horario.texto),
-                                          );
-                                        }).toList(),
-                                        onChanged: (novoValor) {
-                                          if (novoValor != null) {
-                                            setState(
-                                                    () => jogo.horario = novoValor);
-                                          }
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+
+                            // HORÁRIO
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _buildLabel('Horário'),
+                                const SizedBox(height: 8),
+                                DropdownButtonFormField<Horario>(
+                                  value: jogo.horario,
+                                  dropdownColor: const Color(0xFF222222),
+                                  style: const TextStyle(color: Colors.white),
+                                  decoration: _inputDecoration(),
+                                  items: Horario.values.map((horario) {
+                                    return DropdownMenuItem(
+                                      value: horario,
+                                      child: Text(horario.texto),
+                                    );
+                                  }).toList(),
+                                  onChanged: (novoValor) {
+                                    if (novoValor != null) {
+                                      setState(
+                                              () => jogo.horario = novoValor);
+                                    }
+                                  },
                                 ),
                               ],
                             ),
@@ -263,7 +292,8 @@ class _TelaCardsState extends State<TelaCards> {
                                               const EdgeInsets.all(6.0),
                                               decoration: BoxDecoration(
                                                 color: estaSelecionado
-                                                    ? Colors.white.withOpacity(0.18)
+                                                    ? Colors.white
+                                                    .withOpacity(0.18)
                                                     : Colors.transparent,
                                                 borderRadius:
                                                 BorderRadius.circular(10),
